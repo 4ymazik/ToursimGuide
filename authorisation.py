@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect
 from flask_login import LoginManager, login_user, login_required, logout_user
 
 from data import db_session
-from data.add_job import AddJobForm
 from data.login_form import LoginForm
 from data.users import User
 from data.jobs import Jobs
@@ -36,16 +35,14 @@ def reqister():
             name=form.name.data,
             surname=form.surname.data,
             age=form.age.data,
-            position=form.position.data,
             email=form.email.data,
-            speciality=form.speciality.data,
             address=form.address.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+        return render_template('register.html', title='Регистрация', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
